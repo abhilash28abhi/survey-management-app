@@ -14,4 +14,5 @@ public class Response {
     @Column(name = "response_id")
     private long id;
 
+
 }

@@ -1,38 +1,49 @@
 package com.surveymanagement.app.controller;
 
 import com.surveymanagement.app.api.OptionRequest;
-import com.surveymanagement.app.exception.ResourceNotFoundException;
 import com.surveymanagement.app.model.Option;
-import com.surveymanagement.app.repository.OptionRepository;
-import com.surveymanagement.app.repository.QuestionRepository;
+import com.surveymanagement.app.service.impl.OptionManagerImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/v1")
+@Slf4j
 public class OptionController {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private OptionManagerImpl optionManager;
 
-    @Autowired
-    private OptionRepository optionRepository;
-
+    /**
+     * API which creates a new option for a given question id.
+     * @param questionId question id
+     * @param optionRequest request body for create option
+     * @return response body for the option created
+     */
+    @Operation(summary = "Create new option for a question")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created", content = {@Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Option.class))}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+    })
     @PostMapping(value = "/questions/{questionId}/options")
-    public ResponseEntity<Option> createOption (@PathVariable long questionId,
+    public ResponseEntity<Option> createOptionForQuestion (@PathVariable long questionId,
             @RequestBody OptionRequest optionRequest) {
-        Option response = questionRepository.findById(questionId).map(question -> {
-            Option option = new Option();
-            option.setQuestion(question);
-            option.setDescription(optionRequest.getDescription());
-            option.setCreatedDate(new Date());
-            return optionRepository.save(option);
-        }).orElseThrow(() -> new ResourceNotFoundException("Question not found with id : " + questionId));
-
+        log.debug("Inside createOptionForQuestion method to create option for a question Id : {}", questionId);
+        Option response = optionManager.createOptionForQuestionId(questionId, optionRequest);
+        log.debug("Exiting from createOptionForQuestion method after creating new option");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

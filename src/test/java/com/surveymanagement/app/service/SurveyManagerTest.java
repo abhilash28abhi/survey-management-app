@@ -1,7 +1,8 @@
-package com.surveymanagement.app.controller;
+package com.surveymanagement.app.service;
 
 import com.surveymanagement.app.dto.SurveyRequestDto;
 import com.surveymanagement.app.model.Survey;
+import com.surveymanagement.app.repository.SurveyRepository;
 import com.surveymanagement.app.service.impl.SurveyManagerImpl;
 import com.surveymanagement.app.utils.TestUtils;
 import org.junit.Test;
@@ -9,28 +10,26 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SurveyControllerTest {
-
-    @Mock
-    private SurveyManagerImpl manager;
+public class SurveyManagerTest {
 
     @InjectMocks
-    private SurveyController surveyController;
+    private SurveyManagerImpl surveyManager;
+
+    @Mock
+    private SurveyRepository surveyRepository;
 
     @Test
     public void createSurvey_success () {
-        when(manager.createSurvey(any())).thenReturn(TestUtils.getMockSurvey());
-        ResponseEntity<?> resp = surveyController.createSurvey(new SurveyRequestDto());
-        assertEquals(HttpStatus.CREATED, resp.getStatusCode());
-        Survey respBody = (Survey) resp.getBody();
-        assertEquals("test desc", respBody.getDescription());
+        when(surveyRepository.save(any())).thenReturn(TestUtils.getMockSurvey());
+        Survey response = surveyManager.createSurvey(new SurveyRequestDto());
+        assertNotNull(response);
+        assertEquals("test desc", response.getDescription());
     }
 }

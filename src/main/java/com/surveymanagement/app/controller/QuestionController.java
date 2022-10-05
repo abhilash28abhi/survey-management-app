@@ -41,7 +41,8 @@ public class QuestionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = Question.class))}),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PostMapping(value = "/surveys/{surveyId}/questions")
     public ResponseEntity<Question> createQuestionForSurvey (@Min(1) @PathVariable(value = "surveyId") long surveyId,

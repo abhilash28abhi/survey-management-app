@@ -39,7 +39,8 @@ public class OptionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = Option.class))}),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PostMapping(value = "/questions/{questionId}/options")
     public ResponseEntity<Option> createOptionForQuestion (@Min(1) @PathVariable long questionId,

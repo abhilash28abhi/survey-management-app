@@ -36,7 +36,8 @@ public class SurveyController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = Survey.class))}),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PostMapping
     public ResponseEntity<Survey> createSurvey(@Valid @RequestBody SurveyRequestDto request) {

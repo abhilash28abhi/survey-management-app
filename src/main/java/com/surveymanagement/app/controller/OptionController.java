@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -41,7 +42,7 @@ public class OptionController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error"),
     })
     @PostMapping(value = "/questions/{questionId}/options")
-    public ResponseEntity<Option> createOptionForQuestion (@PathVariable long questionId,
+    public ResponseEntity<Option> createOptionForQuestion (@Min(1) @PathVariable long questionId,
             @Valid @RequestBody OptionRequestDto optionRequestDto) {
         log.debug("Inside createOptionForQuestion method to create option for a question Id : {}", questionId);
         Option response = optionManager.createOptionForQuestionId(questionId, optionRequestDto);

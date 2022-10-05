@@ -1,6 +1,6 @@
 package com.surveymanagement.app.controller;
 
-import com.surveymanagement.app.api.QuestionRequest;
+import com.surveymanagement.app.dto.QuestionRequestDto;
 import com.surveymanagement.app.model.Question;
 import com.surveymanagement.app.service.impl.QuestionManagerImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +29,7 @@ public class QuestionController {
     /**
      * API which creates a new question for a given survey id.
      * @param surveyId survey id
-     * @param questionRequest request body for create question
+     * @param questionRequestDto request body for create question
      * @return response body for the created question
      */
     @Operation(summary = "Create new question for a survey")
@@ -40,9 +40,9 @@ public class QuestionController {
     })
     @PostMapping(value = "/surveys/{surveyId}/questions")
     public ResponseEntity<Question> createQuestionForSurvey (@PathVariable(value = "surveyId") long surveyId,
-            @RequestBody QuestionRequest questionRequest) {
+            @RequestBody QuestionRequestDto questionRequestDto) {
         log.debug("Inside createQuestionForSurvey method to create question for survey Id : {}", surveyId);
-        Question response = questionManager.createQuestionForSurvey(surveyId, questionRequest);
+        Question response = questionManager.createQuestionForSurvey(surveyId, questionRequestDto);
         log.debug("Exiting from createQuestionForSurvey method after creating new question");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

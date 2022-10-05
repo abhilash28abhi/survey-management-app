@@ -1,9 +1,9 @@
-package com.surveymanagement.app.api;
+package com.surveymanagement.app.dto;
 
 import lombok.Data;
 
 @Data
-public class QuestionRequest {
+public class QuestionRequestDto {
 
     private String description;
     private boolean active;

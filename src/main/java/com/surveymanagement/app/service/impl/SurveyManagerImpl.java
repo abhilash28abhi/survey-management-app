@@ -1,6 +1,6 @@
 package com.surveymanagement.app.service.impl;
 
-import com.surveymanagement.app.api.SurveyRequest;
+import com.surveymanagement.app.dto.SurveyRequestDto;
 import com.surveymanagement.app.model.Survey;
 import com.surveymanagement.app.repository.SurveyRepository;
 import com.surveymanagement.app.service.ISurveyManager;
@@ -18,7 +18,7 @@ public class SurveyManagerImpl implements ISurveyManager {
     @Autowired
     private SurveyRepository surveyRepository;
 
-    @Override public Survey createSurvey(SurveyRequest request) {
+    @Override public Survey createSurvey(SurveyRequestDto request) {
         Survey survey = new Survey();
         survey.setDescription(request.getDescription());
         survey.setType(request.getType());

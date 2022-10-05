@@ -1,6 +1,6 @@
 package com.surveymanagement.app.service.impl;
 
-import com.surveymanagement.app.api.OptionRequest;
+import com.surveymanagement.app.dto.OptionRequestDto;
 import com.surveymanagement.app.exception.ResourceNotFoundException;
 import com.surveymanagement.app.model.Option;
 import com.surveymanagement.app.repository.OptionRepository;
@@ -24,11 +24,11 @@ public class OptionManagerImpl implements IOptionManager {
     private OptionRepository optionRepository;
 
     @Override
-    public Option createOptionForQuestionId(long questionId, OptionRequest optionRequest) {
+    public Option createOptionForQuestionId(long questionId, OptionRequestDto optionRequestDto) {
         return questionRepository.findById(questionId).map(question -> {
             Option option = new Option();
             option.setQuestion(question);
-            option.setDescription(optionRequest.getDescription());
+            option.setDescription(optionRequestDto.getDescription());
             option.setCreatedDate(new Date());
             return optionRepository.save(option);
         }).orElseThrow(() -> new ResourceNotFoundException("Question not found with id : " + questionId));

@@ -1,10 +1,10 @@
-package com.surveymanagement.app.api;
+package com.surveymanagement.app.dto;
 
 import com.surveymanagement.app.utils.SurveyStatusEnum;
 import lombok.Data;
 
 @Data
-public class SurveyRequest {
+public class SurveyRequestDto {
 
     private String description;
     private String type;

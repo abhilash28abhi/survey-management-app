@@ -1,6 +1,6 @@
 package com.surveymanagement.app.controller;
 
-import com.surveymanagement.app.api.SurveyRequest;
+import com.surveymanagement.app.dto.SurveyRequestDto;
 import com.surveymanagement.app.model.Survey;
 import com.surveymanagement.app.service.impl.SurveyManagerImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,7 +37,7 @@ public class SurveyController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error"),
     })
     @PostMapping
-    public ResponseEntity<Survey> createSurvey(@RequestBody SurveyRequest request) {
+    public ResponseEntity<Survey> createSurvey(@RequestBody SurveyRequestDto request) {
         log.debug("Inside createSurvey method to create new survey");
         Survey response = surveyManager.createSurvey(request);
         log.debug("Exiting from createSurvey method after creating new survey");

@@ -1,6 +1,6 @@
 package com.surveymanagement.app.controller;
 
-import com.surveymanagement.app.api.OptionRequest;
+import com.surveymanagement.app.dto.OptionRequestDto;
 import com.surveymanagement.app.model.Option;
 import com.surveymanagement.app.service.impl.OptionManagerImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +29,7 @@ public class OptionController {
     /**
      * API which creates a new option for a given question id.
      * @param questionId question id
-     * @param optionRequest request body for create option
+     * @param optionRequestDto request body for create option
      * @return response body for the option created
      */
     @Operation(summary = "Create new option for a question")
@@ -40,9 +40,9 @@ public class OptionController {
     })
     @PostMapping(value = "/questions/{questionId}/options")
     public ResponseEntity<Option> createOptionForQuestion (@PathVariable long questionId,
-            @RequestBody OptionRequest optionRequest) {
+            @RequestBody OptionRequestDto optionRequestDto) {
         log.debug("Inside createOptionForQuestion method to create option for a question Id : {}", questionId);
-        Option response = optionManager.createOptionForQuestionId(questionId, optionRequest);
+        Option response = optionManager.createOptionForQuestionId(questionId, optionRequestDto);
         log.debug("Exiting from createOptionForQuestion method after creating new option");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

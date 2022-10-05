@@ -1,6 +1,6 @@
 package com.surveymanagement.app.service.impl;
 
-import com.surveymanagement.app.api.QuestionRequest;
+import com.surveymanagement.app.dto.QuestionRequestDto;
 import com.surveymanagement.app.exception.ResourceNotFoundException;
 import com.surveymanagement.app.model.Question;
 import com.surveymanagement.app.repository.QuestionRepository;
@@ -24,12 +24,12 @@ public class QuestionManagerImpl implements IQuestionManager {
     private QuestionRepository questionRepository;
 
     @Override
-    public Question createQuestionForSurvey(long surveyId, QuestionRequest questionRequest) {
+    public Question createQuestionForSurvey(long surveyId, QuestionRequestDto questionRequestDto) {
         return surveyRepository.findById(surveyId).map(survey -> {
             Question question = new Question();
             question.setSurvey(survey);
-            question.setDescription(questionRequest.getDescription());
-            question.setActive(questionRequest.isActive());
+            question.setDescription(questionRequestDto.getDescription());
+            question.setActive(questionRequestDto.isActive());
             question.setCreatedDate(new Date());
             return questionRepository.save(question);
         }).orElseThrow(() -> new ResourceNotFoundException("Survey not found with id : " + surveyId));

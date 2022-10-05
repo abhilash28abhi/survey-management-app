@@ -1,7 +1,9 @@
 package com.surveymanagement.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -17,6 +19,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "options")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Option {
 
     @Id

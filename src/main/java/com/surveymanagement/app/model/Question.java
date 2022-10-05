@@ -1,6 +1,8 @@
 package com.surveymanagement.app.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -16,6 +18,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "questions")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Question {
 
     @Id

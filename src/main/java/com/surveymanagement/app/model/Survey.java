@@ -1,7 +1,9 @@
 package com.surveymanagement.app.model;
 
 import com.surveymanagement.app.utils.SurveyStatusEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Id;
@@ -18,6 +20,8 @@ import java.util.Date;
 @Entity
 @Table(name = "surveys")
 @Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Survey {
 
     @Id

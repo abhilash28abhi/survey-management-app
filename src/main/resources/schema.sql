@@ -2,6 +2,7 @@ CREATE TABLE surveys (
    survey_id INT NOT NULL AUTO_INCREMENT,
    description VARCHAR(100) ,
    type VARCHAR(50),
+   status VARCHAR(10),
    created_date TIMESTAMP,
    PRIMARY KEY (survey_id)
 );

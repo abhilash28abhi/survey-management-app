@@ -22,6 +22,7 @@ public class SurveyManagerImpl implements ISurveyManager {
         Survey survey = new Survey();
         survey.setDescription(request.getDescription());
         survey.setType(request.getType());
+        survey.setStatus(request.getStatus());
         survey.setCreatedDate(new Date());
         return surveyRepository.save(survey);
     }

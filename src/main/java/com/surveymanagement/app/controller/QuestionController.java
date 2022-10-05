@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1")
 @Slf4j
@@ -40,7 +42,7 @@ public class QuestionController {
     })
     @PostMapping(value = "/surveys/{surveyId}/questions")
     public ResponseEntity<Question> createQuestionForSurvey (@PathVariable(value = "surveyId") long surveyId,
-            @RequestBody QuestionRequestDto questionRequestDto) {
+            @Valid @RequestBody QuestionRequestDto questionRequestDto) {
         log.debug("Inside createQuestionForSurvey method to create question for survey Id : {}", surveyId);
         Question response = questionManager.createQuestionForSurvey(surveyId, questionRequestDto);
         log.debug("Exiting from createQuestionForSurvey method after creating new question");

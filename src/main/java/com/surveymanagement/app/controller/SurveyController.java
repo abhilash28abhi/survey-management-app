@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/surveys")
 @Slf4j
@@ -37,7 +39,7 @@ public class SurveyController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error"),
     })
     @PostMapping
-    public ResponseEntity<Survey> createSurvey(@RequestBody SurveyRequestDto request) {
+    public ResponseEntity<Survey> createSurvey(@Valid @RequestBody SurveyRequestDto request) {
         log.debug("Inside createSurvey method to create new survey");
         Survey response = surveyManager.createSurvey(request);
         log.debug("Exiting from createSurvey method after creating new survey");

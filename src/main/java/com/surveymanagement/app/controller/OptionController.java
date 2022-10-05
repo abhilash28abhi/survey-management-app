@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1")
 @Slf4j
@@ -40,7 +42,7 @@ public class OptionController {
     })
     @PostMapping(value = "/questions/{questionId}/options")
     public ResponseEntity<Option> createOptionForQuestion (@PathVariable long questionId,
-            @RequestBody OptionRequestDto optionRequestDto) {
+            @Valid @RequestBody OptionRequestDto optionRequestDto) {
         log.debug("Inside createOptionForQuestion method to create option for a question Id : {}", questionId);
         Option response = optionManager.createOptionForQuestionId(questionId, optionRequestDto);
         log.debug("Exiting from createOptionForQuestion method after creating new option");

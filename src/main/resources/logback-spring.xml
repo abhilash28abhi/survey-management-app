@@ -31,11 +31,15 @@
     </appender>
 
     <!-- LOG everything at INFO level -->
-    <root level="INFO">
+    <root level="warn">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>
-    <logger name="com.surveymanagement.app" level="INFO" additivity="false">
+    <logger name="com.surveymanagement.app" level="info" additivity="false">
+        <appender-ref ref="RollingFile" />
+        <appender-ref ref="Console" />
+    </logger>
+    <logger name="org.springframework.web" level="debug" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>

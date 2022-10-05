@@ -19,11 +19,6 @@ public class SurveyManagerImpl implements ISurveyManager {
     private SurveyRepository surveyRepository;
 
     @Override public Survey createSurvey(SurveyRequestDto request) {
-        Survey survey = new Survey();
-        survey.setDescription(request.getDescription());
-        survey.setType(request.getType());
-        survey.setStatus(request.getStatus());
-        survey.setCreatedDate(new Date());
-        return surveyRepository.save(survey);
+        return surveyRepository.save(request.toSurvey());
     }
 }

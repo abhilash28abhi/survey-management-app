@@ -29,7 +29,7 @@ public class QuestionRepositoryTest {
         surveyRepository.save(
                 new Survey(1, "test desc", "social", SurveyStatusEnum.ACTIVE, new Date()));
         Question question = questionRepository.save(
-                new Question(1, "test desc", true, new Date(), new Survey(1, "s1", "close", SurveyStatusEnum.ACTIVE, new Date())));
+                new Question(1, "test desc", true, new Date(), new Survey(2, "s1", "close", SurveyStatusEnum.ACTIVE, new Date())));
         assertThat(question).hasFieldOrPropertyWithValue("description", "test desc");
         assertThat(question).hasFieldOrPropertyWithValue("active", true);
     }
